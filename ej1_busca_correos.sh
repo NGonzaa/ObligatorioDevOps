@@ -27,7 +27,7 @@ do
 			then
 				echo "El dominio ingresado no es posible." >&2
 				exit 6
-			elif [[ "$dominio" =~ ^[._] || [_.]$]]
+			elif [[ "$dominio" =~ ^[._] || [_.]$ ]]
 			then
 				echo "El dominio ingresado no es posible." >&2
 				exit 6
