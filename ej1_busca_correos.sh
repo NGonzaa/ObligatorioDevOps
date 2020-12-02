@@ -101,7 +101,7 @@ fi
 cat resultado
 
 # Luego del listado, se hace un echo con el total de correos.
-echo Cantidad de correos encontrados en el directorio $directorio: $(wc -l resultado | cut -c1)
+echo Cantidad de correos encontrados en el directorio $directorio: $(wc -l < resultado)
 
 # Se borra el archivo "resultado" para evitar que en alguna ejcucion futura del script haya correos o resultados duplicados.
 rm resultado
