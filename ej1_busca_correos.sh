@@ -27,6 +27,10 @@ do
 			then
 				echo "El dominio ingresado no es posible." >&2
 				exit 6
+			elif [[ "$dominio" =~ ^[._] || [_.]$]]
+			then
+				echo "El dominio ingresado no es posible." >&2
+				exit 6
 			fi
 		;;
 		*)	# Si se pasa algun parametro distinto de los especificados anteriormente, el script va a terminar con este mensaje de error.
