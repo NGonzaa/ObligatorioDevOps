@@ -25,7 +25,7 @@ do
 			dominio=$OPTARG
 			if ! [[ "$dominio" =~ [a-zA-Z0-9]{2}[a-zA-Z0-9_.]*[^_.] ]]
 			then
-				echo "El dominio ingresado no es posible."
+				echo "El dominio ingresado no es posible." >&2
 				exit 6
 			fi
 		;;
@@ -48,7 +48,7 @@ fi
 # Se chequea que el usuario haya ingresado un directorio.
 if [ -z "$1" ]
 then
-	echo "Por favor, ingrese un directorio."
+	echo "Por favor, ingrese un directorio." >&2
 	exit 6
 fi
 
@@ -58,21 +58,21 @@ directorio=`readlink -m "$1"`
 # Se verifica si el directorio existe en el sistema de archivos.
 if ! [ -a "$directorio" ]
 then
-	echo El directorio "$directorio" no existe. >&2
+	echo "El directorio "$directorio" no existe." >&2
 	exit 1
 fi
 
 # Se verifica si el directorio es un directorio y no otro tipo de archivo.
 if ! [ -d "$directorio" ]
 then
-	echo El parámetro "$directorio" no es un directorio. >&2
+	echo "El parámetro "$directorio" no es un directorio." >&2
 	exit 2
 fi
 
 # Se verifican los permisos de acceso al directorio probandolos explicitamente. Se busca probar los permisos de lectura y ejecucion.
 if ! ([ -r "$directorio" ] && [ -x "$directorio" ])
 then
-	echo No se tienen los permisos necesarios para acceder al directorio y buscar correos. >&2
+	echo "No se tienen los permisos necesarios para acceder al directorio y buscar correos." >&2
 	exit 3
 fi
 
@@ -82,7 +82,7 @@ archivos_a_recorrer=`find "$directorio" $recursivo -name "$ocultosOno" $soloRegu
 # Se prueba si se encontraron archivos en el directorio.
 if [ -z "$archivos_a_recorrer" ]
 then
-    echo No se han encontrado archivos en el directorio $directorio.
+    echo "No se han encontrado archivos en el directorio $directorio."
     exit 0
 fi
 
@@ -92,7 +92,7 @@ grep -hos "[a-zA-Z0-9_.]*[^_.]@$dominio" $archivos_a_recorrer > resultado
 # Se prueba si se encontraron correos en los archivos encontrados.
 if [ -z "$(cat resultado)" ]
 then
-    echo No se han encontrado correos en el directorio $directorio.
+    echo "No se han encontrado correos en el directorio $directorio."
 	rm resultado
     exit 0
 fi
@@ -101,7 +101,7 @@ fi
 cat resultado
 
 # Luego del listado, se hace un echo con el total de correos, utilizando wc -l para contar la cantidad de lineas.
-echo Cantidad de correos encontrados en el directorio $directorio: $(wc -l < resultado)
+echo "Cantidad de correos encontrados en el directorio $directorio: $(wc -l < resultado)"
 
 # Se borra el archivo "resultado" para evitar que en alguna ejcucion futura del script haya correos o resultados duplicados.
 rm resultado
