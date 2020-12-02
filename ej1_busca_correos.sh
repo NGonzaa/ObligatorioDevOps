@@ -105,3 +105,6 @@ echo "Cantidad de correos encontrados en el directorio $directorio: $(wc -l < re
 
 # Se borra el archivo "resultado" para evitar que en alguna ejcucion futura del script haya correos o resultados duplicados.
 rm resultado
+
+# Se cierra el script sin errores.
+exit 0
