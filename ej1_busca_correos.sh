@@ -8,7 +8,7 @@ ocultosOno="*"
 soloRegulares=""
 
 # Se define la expresion regular que matchea dominios de correo.
-dominio="[a-zA-Z0-9]{2}[a-zA-Z0-9_.]*[^_.]"
+dominio="[a-zA-Z0-9]\{2\}[a-zA-Z0-9_.]*[^_.]"
 
 # Se utiliza getopts para procesar los parametro introducidos por el usuario, y definir las variables correspondientes.
 while getopts ":rtd:" modificador
@@ -23,7 +23,7 @@ do
 		;;
 		d)  # Si se pasa el parametro -d junto con el dominio deseado, el mismo se guarda en la variable "dominio", reemplazando la expresion regular. A su vez, se valida que el dominio ingresado cumpla las condiciones de ser un dominio.
 			dominio=$OPTARG
-			if ! [[ "$dominio" =~ [a-zA-Z0-9]{2}[a-zA-Z0-9_.]*[^_.] ]]
+			if ! [[ "$dominio" =~ [a-zA-Z0-9]\{2\}[a-zA-Z0-9_.]*[^_.] ]]
 			then
 				echo "El dominio ingresado no es posible." >&2
 				exit 6
