@@ -86,25 +86,18 @@ then
     exit 0
 fi
 
-# Se usa el comando grep. Se le pasan como parametros una expresion regular que matchee correos, junto a un "@" y la variable dominio, que va a contener o la expresion regular o el dominio ingresado por el usuario, y por ultimo la variable con los archivos encontrados por el find. El resultado del grep va a ser redireccionado a un archivo llamado "resultado".
-grep -hos "[a-zA-Z0-9_.]*[^_.]@$dominio" $archivos_a_recorrer > resultado
+# Se usa el comando grep. Se le pasan como parametros una expresion regular que matchee correos, junto a un "@" y la variable dominio, que va a contener o la expresion regular o el dominio ingresado por el usuario, y por ultimo la variable con los archivos encontrados por el find. El resultado del grep va a ser guardado en una variable llamada "correos".
+correos=`grep -hos "[a-zA-Z0-9_.]*[^_.]@$dominio" $archivos_a_recorrer`
 
 # Se prueba si se encontraron correos en los archivos encontrados.
-if [ -z "$(cat resultado)" ]
+if [ -z "$correos" ]
 then
     echo "No se han encontrado correos en el directorio $directorio."
-	rm resultado
     exit 0
 fi
 
-# Se hace un cat del archivo "resultado" para listar todos los correos encontrados.
-cat resultado
-
 # Luego del listado, se hace un echo con el total de correos, utilizando wc -l para contar la cantidad de lineas.
-echo "Cantidad de correos encontrados en el directorio $directorio: $(wc -l < resultado)"
-
-# Se borra el archivo "resultado" para evitar que en alguna ejcucion futura del script haya correos o resultados duplicados.
-rm resultado
+echo "Cantidad de correos encontrados en el directorio $directorio: $(wc -l < $correos)"
 
 # Se cierra el script sin errores.
 exit 0
