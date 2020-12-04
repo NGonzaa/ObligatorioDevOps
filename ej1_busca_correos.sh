@@ -77,7 +77,7 @@ then
 fi
 
 # Se usa el comando find con todas las opcions definidas por el usuario al ejecutar el script, y se define una variable que contenga los archivos encontrados.
-archivos_a_recorrer=`find "$directorio" $recursivo -name "$ocultosOno" $soloRegulares`
+archivos_a_recorrer=`find "$directorio" $recursivo -name "$ocultosOno" $soloRegulares 2>/dev/null`
 
 # Se prueba si se encontraron archivos en el directorio.
 if [ -z "$archivos_a_recorrer" ]
