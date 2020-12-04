@@ -100,10 +100,10 @@ fi
 echo "$correos"
 
 # Se calcula la cantidad de correos encontrados y se guarda en la variable "cantidad".
-cantidad=echo "$correos" |
+cantidad=`echo "$correos" | wc -l`
 
 # Luego del listado, se hace un echo con el total de correos, utilizando wc -l para contar la cantidad de lineas.
-echo "Cantidad de correos encontrados en el directorio $directorio: $(echo "$correos | wc -l)"
+echo "Cantidad de correos encontrados en el directorio $directorio: $cantidad"
 
-
+# Se cierra el script sin errores.
 exit 0
