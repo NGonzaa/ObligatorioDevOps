@@ -87,7 +87,7 @@ if args.exp_reg != None:
             correosExpReg.append(correo + "\n")
     for correo in correosExpReg:
       print(correo)
-    print("Cantidad de correos encontrados que cumplan con la expresion: ", len(correosExpReg))
+    print("Cantidad de correos encontrados que cumplen con la expresion: ", len(correosExpReg))
 else:
   for correo in listaCorreos:
     print(correo)
