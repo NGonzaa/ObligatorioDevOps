@@ -17,9 +17,9 @@ parser.add_argument("-r", "--recursivo", help="Busca los archivos en forma recur
 
 parser.add_argument("-t", "--archivosTxt", help="Busca los correos en archivos .txt", action="store_true")
 
-parser.add_argument("-d", "--modDominio", help="Modificador -d del dominio", action="store_true")
-
-parser.add_argument("dominio", type=str, help="Dominio del correo.")
+#parser.add_argument("-d", "--modDominio", help="Modificador -d del dominio", action="store_true")
+parser.add_argument("-d", "--modDominio", type=str, help="Dominio")
+#parser.add_argument("dominio", type=str, help="Dominio del correo.")
 
 parser.add_argument("-e", "--cantidad", type=str, choices=["d", "t", "c"], help="Cantidad de correos por dominio (parámetro d) o cantidad de dominios diferentes (parámetro t) o ambos (parámetro c).")
 
@@ -52,8 +52,7 @@ if args.archivosTxt:
 
 if args.modDominio:
     ej1_y_lista_parametros.append("-d")
-
-ej1_y_lista_parametros.append(args.dominio)
+    ej1_y_lista_parametros.append(args.modDominio)
 
 ej1_y_lista_parametros.append(args.directorio)
 
