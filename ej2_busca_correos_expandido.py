@@ -1,0 +1,101 @@
+#!/opt/rh/rh-python36/root/usr/bin/python3.6
+#-*- coding: utf-8 -*-
+import collections
+from subprocess import Popen, PIPE
+import sys
+import argparse
+from collections import Counter
+
+parser = argparse.ArgumentParser()
+
+# Se definen los distintos modificadores
+# con el texto que los describe. Se van adicionando uno a uno.
+# Se define el modificador para recursividad.
+parser.add_argument("-r", "--recursivo", help="Busca los archivos en forma recursiva a partir del directorio pasado como parámetro.", action="store_true")
+
+parser.add_argument("-t", "--archivosTxt", help="Busca los correos en archivos .txt", action="store_true")
+
+parser.add_argument("-d", "--modDominio", help="Modificador -d del dominio", action="store_true")
+
+parser.add_argument("dominio", type=str, help="Dominio del correo.")
+
+parser.add_argument("-e", "--cantidad", type=str, choices=["d", "t", "c"], help="Cantidad de correos por dominio (parámetro d) o cantidad de dominios diferentes (parámetro t) o ambos (parámetro c).")
+
+parser.add_argument("-f", "--modExpRegular", help="Modificador -f de la expresion regular", action="store_true")
+
+parser.add_argument("expRegular", type=str, help="Expresion regular.")
+
+parser.add_argument("-o", "--orden", type=str, choices=["a", "d", "l"], help="Orden de los correos, alfabeticamente creciente (parámetro a) /"
+                                                                             "o dominios ordenados alfabeticamente creciente (parámetro d)/"
+                                                                             "o el largo de caracteres en forma creciente (parámetro l.")
+
+parser.add_argument("directorio", type=str, help="Directorio donde se va a hacer la búsqueda.")
+
+try:
+    args = parser.parse_args()
+except SystemExit as e:
+ # Se define a 10 como el código de salida en caso que se detecte
+ # algún problema en los argumentos de entrada.
+    print("Error la sintaxis correcta del script es: ej2_busca_correos_expandido.py [-r] [-t] [-d dom] [-e {d,t,c}] [-f RegExp] [-o {a,d,l}] Dir")
+    exit(20)
+
+
+ej1_y_lista_parametros = ['/root/ej1_busca_correos.sh']
+
+
+if args.recursivo:
+    ej1_y_lista_parametros.append("-r")
+
+if args.archivosTxt:
+    ej1_y_lista_parametros.append("-t")
+
+if args.modDominio:
+    ej1_y_lista_parametros.append("-d")
+
+ej1_y_lista_parametros.append(args.dominio)
+
+ej1_y_lista_parametros.append(args.directorio)
+
+# salida estándar y la salida estándar de errores.
+process = Popen(ej1_y_lista_parametros, stdout = PIPE, stderr = PIPE)
+
+output = process.communicate()
+
+"""
+if process.returncode > 0:
+    print(output[1].decode(), file=sys.stderr, end="")
+    exit(process.returncode)
+
+if output[1].decode() != "":
+    print(output[1].decode(), file=sys.stderr, end="")
+    exit(0)
+"""
+
+listaCorreos = output[0].decode().split("\n")
+listaCorreos.pop(-1)
+
+#for correo in listaCorreos:
+#    print(correo)
+
+#-e
+
+
+if args.cantidad == "d":
+    listaDominio=[]
+    for lineaCorreo in listaCorreos[:-1]:
+        listaDominio.append(lineaCorreo.split("@")[1])
+        #print(listaDominio)
+
+    print(collections.Counter(listaDominio))
+
+
+
+
+"""
+if args.cantidad == "t":
+
+if args.cantidad == "c":
+"""
+
+#argumentos requeridos ojoooo
+#errores de la salida estandar de errores del ej1
