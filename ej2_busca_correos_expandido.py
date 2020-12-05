@@ -74,9 +74,6 @@ if output[1].decode('utf-8') !="":
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
 
-#for correo in listaCorreos:
-#    print(correo)
-
 if args.exp_reg != None:
     try:
         patron = re.compile(args.exp_reg)
@@ -89,6 +86,9 @@ if args.exp_reg != None:
         if patron.match(correo):
             correosExpReg.append(correo + "\n")
     print(correosExpReg)
+else:
+  for correo in listaCorreos:
+    print(correo)
 
 # -e
 listaDominio=[]
