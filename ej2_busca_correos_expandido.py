@@ -19,7 +19,7 @@ parser.add_argument("-t", "--archivosTxt", help="Busca los correos en archivos .
 
 parser.add_argument("-d", "--modDominio", help="Modificador -d del dominio", action="store_true")
 
-parser.add_argument("dominio", type=str, nargs='?', default="", help="Dominio del correo.")
+parser.add_argument("dominio", type=str, help="Dominio del correo.")
 
 parser.add_argument("-e", "--cantidad", type=str, choices=["d", "t", "c"], help="Cantidad de correos por dominio (parámetro d) o cantidad de dominios diferentes (parámetro t) o ambos (parámetro c).")
 
