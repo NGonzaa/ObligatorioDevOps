@@ -5,6 +5,7 @@ from subprocess import Popen, PIPE
 import sys
 import argparse
 import re
+import collections
 from collections import Counter
 
 parser = argparse.ArgumentParser()
