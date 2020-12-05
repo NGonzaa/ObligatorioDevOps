@@ -1,4 +1,4 @@
-#!/opt/rh/rh-python36/root/usr/bin/python3.6
+#!/usr/bin/python3.6
 #-*- coding: utf-8 -*-
 import collections
 from subprocess import Popen, PIPE
@@ -39,9 +39,7 @@ except SystemExit as e:
     print("Error la sintaxis correcta del script es: ej2_busca_correos_expandido.py [-r] [-t] [-d dom] [-e {d,t,c}] [-f RegExp] [-o {a,d,l}] Dir")
     exit(20)
 
-
 ej1_y_lista_parametros = ['/root/ej1_busca_correos.sh']
-
 
 if args.recursivo:
     ej1_y_lista_parametros.append("-r")
@@ -78,8 +76,6 @@ listaCorreos.pop(-1)
 #    print(correo)
 
 #-e
-
-
 if args.cantidad == "d":
     listaDominio=[]
     for lineaCorreo in listaCorreos[:-1]:
@@ -87,9 +83,6 @@ if args.cantidad == "d":
         #print(listaDominio)
 
     print(collections.Counter(listaDominio))
-
-
-
 
 """
 if args.cantidad == "t":
