@@ -22,9 +22,10 @@ parser.add_argument("dominio", type=str, help="Dominio del correo.")
 
 parser.add_argument("-e", "--cantidad", type=str, choices=["d", "t", "c"], help="Cantidad de correos por dominio (parámetro d) o cantidad de dominios diferentes (parámetro t) o ambos (parámetro c).")
 
-parser.add_argument("-f", "--modExpRegular", help="Modificador -f de la expresion regular", action="store_true")
+#parser.add_argument("-f", "--modExpRegular", help="Modificador -f de la expresion regular", action="store_true")
+parser.add_argument("-f", "--exp_reg", type=str, help="Expresion regular")
 
-parser.add_argument("expRegular", type=str, help="Expresion regular.")
+#parser.add_argument("expRegular", type=str, help="Expresion regular.")
 
 parser.add_argument("-o", "--orden", type=str, choices=["a", "d", "l"], help="Orden de los correos, alfabeticamente creciente (parámetro a) /"
                                                                              "o dominios ordenados alfabeticamente creciente (parámetro d)/"
@@ -99,13 +100,19 @@ if args.cantidad == "c":
     print("\n")
     print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
 
-if args.modExpRegular != None:
+if args.exp_reg != None:
     try:
-        patron = re.compile(args.expRegular)
+        patron = re.compile(args.exp_reg)
     except Exception as e:
         std=file = sys.stderr
         print("La expresion regular ingresada es incorrecta, ingrese una expresion regular valida.", std)
         exit(10)
+    correosExpReg=[]
+    for correo in listaCorreos:
+        if patron.match(correo):
+            correosExpReg.append(correo + "\n")
+    print(correosExpReg)
+
 
 #argumentos requeridos ojoooo
 #errores de la salida estandar de errores del ej1
