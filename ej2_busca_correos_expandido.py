@@ -1,4 +1,4 @@
-#!/opt/rh/rh-python36/root/usr/bin/python3.6
+#!/usr/bin/python3.6
 #-*- coding: utf-8 -*-
 
 from subprocess import Popen, PIPE
