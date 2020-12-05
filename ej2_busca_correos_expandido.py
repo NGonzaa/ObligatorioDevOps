@@ -74,31 +74,8 @@ if output[1].decode('utf-8') !="":
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
 
-for correo in listaCorreos:
-    print(correo)
-
-#-e
-listaDominio=[]
-for lineaCorreo in listaCorreos[:-1]:
-    listaDominio.append(lineaCorreo.split("@")[1])
-    #print(listaDominio)
-
-if args.cantidad == "d":
-    diccionario=collections.Counter(listaDominio)
-    print("Reporte cantidad de correos encontrados por dominio: ", "\n")
-    for key, value in diccionario.items():
-        print(key,":", value)
-
-if args.cantidad == "t":
-    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
-
-if args.cantidad == "c":
-    diccionario=collections.Counter(listaDominio)
-    print("Reporte cantidad de correos encontrados por dominio: ", "\n")
-    for key, value in diccionario.items():
-        print(key ,":", value)
-    print("\n")
-    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
+#for correo in listaCorreos:
+#    print(correo)
 
 if args.exp_reg != None:
     try:
@@ -113,6 +90,27 @@ if args.exp_reg != None:
             correosExpReg.append(correo + "\n")
     print(correosExpReg)
 
+# -e
+listaDominio=[]
+for lineaCorreo in listaCorreos[:-1]:
+    listaDominio.append(lineaCorreo.split("@")[1])
+
+if args.cantidad == "d":
+    diccionario=collections.Counter(listaDominio)
+    print("Reporte cantidad de correos encontrados por dominio: ", "\n")
+    for key, value in diccionario.items():
+        print(key, ":", value)
+
+if args.cantidad == "t":
+    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
+
+if args.cantidad == "c":
+    diccionario=collections.Counter(listaDominio)
+    print("Reporte cantidad de correos encontrados por dominio: ", "\n")
+    for key, value in diccionario.items():
+        print(key,":", value)
+    print("\n")
+    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
 
 #argumentos requeridos ojoooo
 #errores de la salida estandar de errores del ej1
