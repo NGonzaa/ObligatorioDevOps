@@ -1,9 +1,10 @@
-#!/usr/bin/python3.6
+#!/opt/rh/rh-python36/root/usr/bin/python3.6
 #-*- coding: utf-8 -*-
-import collections
+
 from subprocess import Popen, PIPE
 import sys
 import argparse
+import re
 from collections import Counter
 
 parser = argparse.ArgumentParser()
@@ -39,7 +40,7 @@ except SystemExit as e:
     print("Error la sintaxis correcta del script es: ej2_busca_correos_expandido.py [-r] [-t] [-d dom] [-e {d,t,c}] [-f RegExp] [-o {a,d,l}] Dir")
     exit(20)
 
-ej1_y_lista_parametros = ['/root/ej1_busca_correos.sh']
+ej1_y_lista_parametros = ['/home/nacho/DevOps/ej1_busca_correos.sh']
 
 if args.recursivo:
     ej1_y_lista_parametros.append("-r")
@@ -59,36 +60,53 @@ process = Popen(ej1_y_lista_parametros, stdout = PIPE, stderr = PIPE)
 
 output = process.communicate()
 
-"""
 if process.returncode > 0:
-    print(output[1].decode(), file=sys.stderr, end="")
+    std=file=sys.stderr
+    print(output[1].decode('utf-8'), std)
     exit(process.returncode)
 
-if output[1].decode() != "":
-    print(output[1].decode(), file=sys.stderr, end="")
+if output[1].decode('utf-8') !="":
+    std=file=sys.stderr
+    print(output[1].decode('utf-8'), std)
     exit(0)
-"""
 
-listaCorreos = output[0].decode().split("\n")
+listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
 
-#for correo in listaCorreos:
-#    print(correo)
+for correo in listaCorreos:
+    print(correo)
 
 #-e
+listaDominio=[]
+for lineaCorreo in listaCorreos[:-1]:
+    listaDominio.append(lineaCorreo.split("@")[1])
+    #print(listaDominio)
+
 if args.cantidad == "d":
-    listaDominio=[]
-    for lineaCorreo in listaCorreos[:-1]:
-        listaDominio.append(lineaCorreo.split("@")[1])
-        #print(listaDominio)
+    diccionario=collections.Counter(listaDominio)
+    print("Reporte cantidad de correos encontrados por dominio: ", "\n")
+    for key, value in diccionario.items():
+        print(key,":", value)
 
-    print(collections.Counter(listaDominio))
-
-"""
 if args.cantidad == "t":
+    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
 
 if args.cantidad == "c":
-"""
+    diccionario=collections.Counter(listaDominio)
+    print("Reporte cantidad de correos encontrados por dominio: ", "\n")
+    for key, value in diccionario.items():
+        print(key ,":", value)
+    print("\n")
+    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
+
+if args.modExpRegular != None:
+    try:
+        patron = re.compile(args.expRegular)
+    except Exception as e:
+        std=file = sys.stderr
+        print("La expresion regular ingresada es incorrecta, ingrese una expresion regular valida.", std)
+        exit(10)
 
 #argumentos requeridos ojoooo
 #errores de la salida estandar de errores del ej1
+#error en el print con file=sys.stderr
