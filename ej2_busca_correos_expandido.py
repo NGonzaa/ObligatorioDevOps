@@ -116,7 +116,7 @@ if args.cantidad == "c":
 
 # alfabetica creciente
 if args.orden == "a":
-  listaCorreos.sort(listaCorreos.lower())
+  print(listaCorreos.sort(listaCorreos.lower()))
 
 #errores de la salida estandar de errores del ej1
 #error en el print con file=sys.stderr
