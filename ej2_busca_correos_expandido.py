@@ -95,9 +95,9 @@ if args.exp_reg != None:
 if args.orden == "a":
   listaCorreos.sort()
 
-#for correo in listaCorreos:
-#  print(correo)
-#print(msjCantidad)
+for correo in listaCorreos:
+  print(correo)
+print(msjCantidad)
 
 # -e
 listaDominio=[]
