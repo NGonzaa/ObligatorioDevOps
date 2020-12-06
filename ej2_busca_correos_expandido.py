@@ -110,7 +110,7 @@ if args.cantidad == "d":
         print(key, ":", value)
 
 if args.cantidad == "t":
-    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
+    print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
 
 if args.cantidad == "c":
     diccionario = collections.Counter(listaDominio)
@@ -118,4 +118,4 @@ if args.cantidad == "c":
     for key, value in diccionario.items():
         print(key,":", value)
     print("\n")
-    print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
+    print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
