@@ -90,7 +90,7 @@ if args.orden == "a":
 
 for correo in listaCorreos:
   print(correo)
-print(msjCantidad)
+print(*msjCantidad)
 
 # -e
 listaDominio=[]
