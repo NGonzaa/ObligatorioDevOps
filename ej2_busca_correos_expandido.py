@@ -67,7 +67,6 @@ if output[1].decode('utf-8') !="":
 
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
-msjCantidad = listaCorreos[-1]
 listaCorreos.pop(-1)
 
 if args.exp_reg != None:
@@ -82,7 +81,6 @@ if args.exp_reg != None:
         if patron.match(correo):
             correosExpReg.append(correo)
     listaCorreos = correosExpReg
-    print("Cantidad de correos encontrados que cumplen con la expresion:", len(listaCorreos))
 
 # alfabetica creciente
 if args.orden == "a":
@@ -90,7 +88,7 @@ if args.orden == "a":
 
 for correo in listaCorreos:
   print(correo)
-print(msjCantidad)
+print("Cantidad de correos encontrados que cumplen con la expresion:", len(listaCorreos))
 
 # -e
 listaDominio=[]
