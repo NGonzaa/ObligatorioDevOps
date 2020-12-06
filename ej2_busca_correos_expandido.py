@@ -118,13 +118,5 @@ if args.cantidad == "c":
 if args.orden == "a":
   listaCorreos.sort(listaCorreos.lower())
 
-# dominio alfabetico creciente
-if args.orden == "d":
-  
-
-# largo creciente
-if args.orden == "l":
-  
-
 #errores de la salida estandar de errores del ej1
 #error en el print con file=sys.stderr
