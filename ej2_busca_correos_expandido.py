@@ -1,7 +1,7 @@
 #!/usr/bin/python3.6
 #-*- coding: utf-8 -*-
 
-# Se importan los modulos que van a ser utilizados.
+# Se importan los módulos que van a ser utilizados.
 from subprocess import Popen, PIPE
 import sys
 import argparse
@@ -59,15 +59,23 @@ if process.returncode > 0:
     print(output[1].decode('utf-8'), file=sys.stderr, end="")
     exit(process.returncode)
 
+# Si no hay errores, pero el script no encuentra ningun archivo o correo igualmente se usa el mensaje recibido, con el codigo 0.
 if output[1].decode('utf-8') !="":
     print(output[1].decode('utf-8'), file=sys.stderr)
     exit(0)
 
+# Una vez se reciba la lista de correos del script 1, se guarda en "listaCorreos".
+# Como en esa lista, el ultimo item es un espacio vacio, se elimina con pop(-1), y el mensaje de la cantidad de correos encontrados tambien se quita de la lista
+# y se guarda por separado,  en caso de que el usuario quiera filtrar por una expresion regular y haya que cambiar el mensaje.
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
 msjCantidad = [listaCorreos[-1]]
 listaCorreos.pop(-1)
 
+# Se procesa el parametro -f y la expresion regular ingresada. Primero se prueba que la expresion regular sea valida.
+# Luego se crea la lista "correosExpReg", en donde se guardan solo los correos que cumplan con la expresion regular, 
+# y despues se sobreescribe "listaCorreos" con "corresExpReg", para poder alterarla mas adelante en caso de que se reciba -o.
+# Tambien se cambia el mensaje de cantidad, ya que ahora la cantidad es diferente a la que nos dice el script 1.
 if args.exp_reg != None:
     try:
         patron = re.compile(args.exp_reg)
@@ -81,7 +89,7 @@ if args.exp_reg != None:
     listaCorreos = correosExpReg
     msjCantidad = ["Cantidad de correos encontrados que cumplen con la expresion:", len(listaCorreos)]
 
-# alfabetica creciente
+# Se procesa el parametro -o y sus opciones: a, d y l.
 if args.orden == "a":
   listaCorreos.sort()
 
@@ -110,6 +118,3 @@ if args.cantidad == "c":
         print(key,":", value)
     print("\n")
     print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
-
-#errores de la salida estandar de errores del ej1
-#error en el print con file=sys.stderr
