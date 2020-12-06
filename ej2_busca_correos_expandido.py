@@ -74,9 +74,6 @@ if output[1].decode('utf-8') !="":
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
 
-#for correo in listaCorreos:
-#  print(correo)
-
 if args.exp_reg != None:
     try:
         patron = re.compile(args.exp_reg)
@@ -116,7 +113,10 @@ if args.cantidad == "c":
 
 # alfabetica creciente
 if args.orden == "a":
-  print(listaCorreos.sort(listaCorreos.lower()))
+  print(listaCorreos.sort(key = lambda correo: correo.split(":")[1]))
+
+#for correo in listaCorreos:
+#  print(correo)
 
 #errores de la salida estandar de errores del ej1
 #error en el print con file=sys.stderr
