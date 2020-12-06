@@ -105,7 +105,7 @@ for lineaCorreo in listaCorreos:
 
 if args.cantidad == "d":
     diccionario = collections.Counter(listaDominio)
-    print("\n","Reporte cantidad de correos encontrados por dominio:", "\n")
+    print("Reporte cantidad de correos encontrados por dominio:", "\n")
     for key, value in diccionario.items():
         print(key, ":", value)
 
@@ -117,5 +117,4 @@ if args.cantidad == "c":
     print("Reporte cantidad de correos encontrados por dominio:", "\n")
     for key, value in diccionario.items():
         print(key,":", value)
-    print("\n")
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
