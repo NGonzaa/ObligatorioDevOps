@@ -56,7 +56,7 @@ output = process.communicate()
 
 # Si hay errores, el script 2 interpreta los codigos enviados por el script 2 y muestra los mensajes acorde.
 if process.returncode > 0:
-    print(output[1].decode('utf-8'), file=sys.stderr)
+    print(output[1].decode('utf-8'), file=sys.stderr, end="")
     exit(process.returncode)
 
 if output[1].decode('utf-8') !="":
