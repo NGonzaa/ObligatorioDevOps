@@ -94,7 +94,7 @@ print(*msjCantidad)
 
 # -e
 listaDominio=[]
-for lineaCorreo in listaCorreos[:-1]:
+for lineaCorreo in listaCorreos:
     listaDominio.append(lineaCorreo.split("@")[1])
 
 if args.cantidad == "d":
