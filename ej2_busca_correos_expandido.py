@@ -56,13 +56,11 @@ output = process.communicate()
 
 # Si hay errores, el script 2 interpreta los codigos enviados por el script 2 y muestra los mensajes acorde.
 if process.returncode > 0:
-    std=file=sys.stderr
-    print(output[1].decode('utf-8'), std)
+    print(output[1].decode('utf-8'), file=sys.stderr)
     exit(process.returncode)
 
 if output[1].decode('utf-8') !="":
-    std=file=sys.stderr
-    print(output[1].decode('utf-8'), std)
+    print(output[1].decode('utf-8'), file=sys.stderr)
     exit(0)
 
 listaCorreos = output[0].decode('utf-8').split("\n")
@@ -74,8 +72,7 @@ if args.exp_reg != None:
     try:
         patron = re.compile(args.exp_reg)
     except Exception as e:
-        std=file=sys.stderr
-        print("La expresion regular ingresada es incorrecta, ingrese una expresion regular valida.", std)
+        print("La expresion regular ingresada es incorrecta, ingrese una expresion regular valida.", file=sys.stderr)
         exit(10)
     correosExpReg=[]
     for correo in listaCorreos:
