@@ -73,12 +73,14 @@ if output[1].decode('utf-8') !="":
 
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
+msjCantidad = listaCorreos[-1]
+listaCorreos.pop(-1)
 
 if args.exp_reg != None:
     try:
         patron = re.compile(args.exp_reg)
     except Exception as e:
-        std=file = sys.stderr
+        std=file=sys.stderr
         print("La expresion regular ingresada es incorrecta, ingrese una expresion regular valida.", std)
         exit(10)
     correosExpReg=[]
@@ -88,6 +90,14 @@ if args.exp_reg != None:
     for correo in correosExpReg:
       print(correo)
     print("Cantidad de correos encontrados que cumplen con la expresion: ", len(correosExpReg))
+
+# alfabetica creciente
+if args.orden == "a":
+  listaCorreos.sort()
+
+#for correo in listaCorreos:
+#  print(correo)
+#print(msjCantidad)
 
 # -e
 listaDominio=[]
@@ -110,13 +120,6 @@ if args.cantidad == "c":
         print(key,":", value)
     print("\n")
     print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
-
-# alfabetica creciente
-if args.orden == "a":
-  print(listaCorreos.sort(key = lambda correo: correo.split(":")[1]))
-
-#for correo in listaCorreos:
-#  print(correo)
 
 #errores de la salida estandar de errores del ej1
 #error en el print con file=sys.stderr
