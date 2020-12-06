@@ -80,7 +80,7 @@ if args.exp_reg != None:
     correosExpReg=[]
     for correo in listaCorreos:
         if patron.match(correo):
-            correosExpReg.append(correo + "\n")
+            correosExpReg.append(correo)
     listaCorreos = correosExpReg
     for correo in listaCorreos:
         print(correo)
