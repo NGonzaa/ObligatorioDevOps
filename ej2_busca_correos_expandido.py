@@ -74,6 +74,9 @@ if output[1].decode('utf-8') !="":
 listaCorreos = output[0].decode('utf-8').split("\n")
 listaCorreos.pop(-1)
 
+#for correo in listaCorreos:
+#  print(correo)
+
 if args.exp_reg != None:
     try:
         patron = re.compile(args.exp_reg)
@@ -88,9 +91,6 @@ if args.exp_reg != None:
     for correo in correosExpReg:
       print(correo)
     print("Cantidad de correos encontrados que cumplen con la expresion: ", len(correosExpReg))
-else:
-  for correo in listaCorreos:
-    print(correo)
 
 # -e
 listaDominio=[]
@@ -114,6 +114,17 @@ if args.cantidad == "c":
     print("\n")
     print("Cantidad de dominios diferentes encontrados: ", len(collections.Counter(listaDominio).keys()))
 
-#argumentos requeridos ojoooo
+# alfabetica creciente
+if args.orden == "a":
+  listaCorreos.sort(listaCorreos.lower())
+
+# dominio alfabetico creciente
+if args.orden == "d":
+  
+
+# largo creciente
+if args.orden == "l":
+  
+
 #errores de la salida estandar de errores del ej1
 #error en el print con file=sys.stderr
