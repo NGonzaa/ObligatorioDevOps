@@ -1,6 +1,7 @@
 #!/usr/bin/python3.6
 #-*- coding: utf-8 -*-
 
+# Se importan los modulos que van a ser utilizados.
 from subprocess import Popen, PIPE
 import sys
 import argparse
@@ -8,40 +9,32 @@ import re
 import collections
 from collections import Counter
 
+# Se crea un objeto parser para procesar los parametros que se la van a pasar al script.
 parser = argparse.ArgumentParser()
 
-# Se definen los distintos modificadores
-# con el texto que los describe. Se van adicionando uno a uno.
-# Se define el modificador para recursividad.
+# Se definen los distintos modificadores del script. Se van adicionando uno a uno al parser.
 parser.add_argument("-r", "--recursivo", help="Busca los archivos en forma recursiva a partir del directorio pasado como parámetro.", action="store_true")
 
 parser.add_argument("-t", "--archivosTxt", help="Busca los correos en archivos .txt", action="store_true")
 
-#parser.add_argument("-d", "--modDominio", help="Modificador -d del dominio", action="store_true")
-parser.add_argument("-d", "--modDominio", type=str, help="Dominio")
-#parser.add_argument("dominio", type=str, help="Dominio del correo.")
+parser.add_argument("-d", "--modDominio", type=str, help="Busca correos pertenecientes al dominio ingresado.")
 
-parser.add_argument("-e", "--cantidad", type=str, choices=["d", "t", "c"], help="Cantidad de correos por dominio (parámetro d) o cantidad de dominios diferentes (parámetro t) o ambos (parámetro c).")
+parser.add_argument("-e", "--cantidad", type=str, choices=["d", "t", "c"], help="Muestra la cantidad de correos por dominio (d), cantidad de dominios diferentes (t), o ambos (c).")
 
-#parser.add_argument("-f", "--modExpRegular", help="Modificador -f de la expresion regular", action="store_true")
-parser.add_argument("-f", "--exp_reg", type=str, help="Expresion regular")
+parser.add_argument("-f", "--exp_reg", type=str, help="Busca correos que cumplan con la expresion regular ingresada.")
 
-#parser.add_argument("expRegular", type=str, help="Expresion regular.")
-
-parser.add_argument("-o", "--orden", type=str, choices=["a", "d", "l"], help="Orden de los correos, alfabeticamente creciente (parámetro a) /"
-                                                                             "o dominios ordenados alfabeticamente creciente (parámetro d)/"
-                                                                             "o el largo de caracteres en forma creciente (parámetro l.")
+parser.add_argument("-o", "--orden", type=str, choices=["a", "d", "l"], help="Ordena los correos alfabeticamente creciente (a), dominios alfabeticamente creciente (d), o el largo de caracteres en forma creciente (l).")
 
 parser.add_argument("directorio", type=str, help="Directorio donde se va a hacer la búsqueda.")
 
+# Se crea un try catch que procese excepciones, por si algun parametro es ingresado erroneamente.
 try:
     args = parser.parse_args()
 except SystemExit as e:
- # Se define a 10 como el código de salida en caso que se detecte
- # algún problema en los argumentos de entrada.
     print("Error la sintaxis correcta del script es: ej2_busca_correos_expandido.py [-r] [-t] [-d dom] [-e {d,t,c}] [-f RegExp] [-o {a,d,l}] Dir")
     exit(20)
 
+# Se crea la lista con el directorio que se le va a pasar al script del ejercicio 1. Los parametros que hayan sido ingresados tambien se van sumando a la lista.
 ej1_y_lista_parametros = ['/home/nacho/DevOps/ej1_busca_correos.sh']
 
 if args.recursivo:
@@ -56,11 +49,12 @@ if args.modDominio:
 
 ej1_y_lista_parametros.append(args.directorio)
 
-# salida estándar y la salida estándar de errores.
+# Usando Popen, PIPE y process, se ejecuta el script del ejercicio con los parametros de la lista creada anteriormente, y se guarda el stdout y el stderr.
 process = Popen(ej1_y_lista_parametros, stdout = PIPE, stderr = PIPE)
 
 output = process.communicate()
 
+# Si hay errores, el script 2 interpreta los codigos enviados por el script 2 y muestra los mensajes acorde.
 if process.returncode > 0:
     std=file=sys.stderr
     print(output[1].decode('utf-8'), std)
