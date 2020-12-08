@@ -89,9 +89,10 @@ if args.exp_reg != None:
     listaCorreos = correosExpReg
     msjCantidad = ["Cantidad de correos encontrados que cumplen con la expresion:", len(listaCorreos)]
 
-# Se procesa el parámetro -o y sus opciones: a, d y l.
+# Se procesa el parámetro -o y sus opciones: a, d y l. La opción "a" ordena la lista por orden alfabético creciente,
+# la opción "d" la ordena por dominios de manera alfabética creciente, y la opción "l" ordena según el largo de carácteres de manera creciente.
 if args.orden == "a":
-  listaCorreos.sort()
+    listaCorreos.sort()
 
 if args.orden == "d":
     for correo in listaCorreos:
@@ -106,7 +107,10 @@ for correo in listaCorreos:
   print(correo)
 print(*msjCantidad)
 
-# Se procesa el parámetro -e y sus opciones: d, t y c.
+# Se procesa el parámetro -e y sus opciones: d, t y c. Primero se consiguen los dominios, haciendo split a los correos de la lista y guardando los
+# dominios en una lista nueva llamada "listaDominio". Si se pasa la opción "d", se cuenta la cantidad de correos que hay de cada dominio,
+# si se opta por la opción "t" se cuenta cuantos dominios diferentes fueron encontrados, y si la opción elegida es "c", se hacen y se imprimen ambas
+# cuentas. Para faciilitar el conteo, se usa la función Counter del módulo "collections".
 listaDominio = []
 for lineaCorreo in listaCorreos:
     listaDominio.append(lineaCorreo.split("@")[1])
