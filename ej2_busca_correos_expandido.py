@@ -120,7 +120,7 @@ if args.cantidad == "c":
     print("\n")
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
 
-    if args.orden == "d":
+if args.orden == "d":
     print(" ")
     print("parametro -o d")
     print("Correos ordenados por dominio, en orden alfabético creciente por el dominio: ","\n")
