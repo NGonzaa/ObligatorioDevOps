@@ -95,7 +95,15 @@ if args.orden == "a":
 
 if args.orden == "d":
     for correo in listaCorreos:
-        listaCorreos.sort(key=lambda correo: str(correo.split("@")[1]))
+        listaCorreos.sort(key = lambda correo: str(correo.split("@")[1]))
+
+if args.orden == "l":
+    lista = listaCorreos
+    listaCorreos = []
+    for correo in lista:
+        listaCorreos.append(correo + ": " + str(len(correo)))
+    for correoConCantCaract in listaCorreos:
+        listaCorreos.sort(key = lambda correoConCantCaract: correoConCantCaract.split(":")[1])
 
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
 for correo in listaCorreos:
@@ -123,15 +131,3 @@ if args.cantidad == "c":
         print(key,":", value)
     print("\n")
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
-
-if args.orden == "l":
-    print(" ")
-    print("parametro -o l")
-    print("Correos ordenados por su largo en caracteres en forma creciente: ","\n")
-    lista=[]
-    for correo in listaCorreos:
-        lista.append(correo+":"+str(len(correo)))
-    for correoConCantCaract in lista:
-        lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
-    for l in lista:
-        print(l)
