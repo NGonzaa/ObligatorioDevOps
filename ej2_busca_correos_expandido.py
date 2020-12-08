@@ -95,15 +95,11 @@ if args.orden == "a":
 
 if args.orden == "d":
     for correo in listaCorreos:
-        listaCorreos.sort(key = lambda correo: str(correo.split("@")[1]))
+        listaCorreos.sort(key = lambda correo: correo.split("@")[1])
 
 if args.orden == "l":
-    lista = listaCorreos
-    listaCorreos = []
-    for correo in lista:
-        listaCorreos.append(correo + ": " + str(len(correo)))
-    for correoConCantCaract in listaCorreos:
-        listaCorreos.sort(key = lambda correoConCantCaract: correoConCantCaract.split(":")[1])
+    for correo in listaCorreos:
+        listaCorreos.sort(key = lambda correo: len(correo))
 
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
 for correo in listaCorreos:
