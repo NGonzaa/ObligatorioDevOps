@@ -95,11 +95,11 @@ if args.exp_reg != None:
 if args.orden != None:
     print("a")
     if args.orden == "a":
-        print(" ")
+        print("asd")
         print("parametro -o a")
         listaCorreos.sort()
         print("Correos ordenados en forma alfabetica creciente: ","\n")
-
+    
     if args.orden == "d":
         print(" ")
         print("parametro -o d")
