@@ -122,7 +122,7 @@ if args.orden != None:
         for correoConCantCaract in lista:
             lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
         for l in lista:
-            print(l)
+            print(l.split(":")[0])
         print(*msjCantidad)
 else:
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
