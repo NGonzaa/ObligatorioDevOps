@@ -35,7 +35,8 @@ except SystemExit as e:
     exit(20)
 
 # Se crea la lista con el directorio que se le va a pasar al script del ejercicio 1. Los parámetros que hayan sido ingresados también se van sumando a la lista.
-ej1ListaParametros = ['/home/nacho/DevOps/ej1_busca_correos.sh']
+ej1ListaParametros = ['/home/nacho/DevOps/ej1_busca_correos.sh', "-r", "-t", "correos/"]
+print(ej1ListaParametros)
 
 if args.recursivo:
     ej1ListaParametros.append("-r")
@@ -123,27 +124,30 @@ if args.orden != None:
             lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
         for l in lista:
             print(l.split(":")[0])
-        print(*msjCantidad)
+        print(*msjCantidad, "\n")
 else:
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
     for correo in listaCorreos:
         print(correo)
-    print(*msjCantidad)
+    print(*msjCantidad, "\n")
 
-# Se procesa el parámetro -e y sus opciones: d, t y c.
+# Se procesa el parámetro -e y sus opciones: d, t y c. Primero se consiguen los dominios y se guardan en una lista nueva.
 listaDominio = []
 for lineaCorreo in listaCorreos:
     listaDominio.append(lineaCorreo.split("@")[1])
 
+# Si se pasa la opcion d, se cuenta la cantidad de correos que hay en cada dominio. Para esto se usa collections.Counter(listaDominio).
 if args.cantidad == "d":
     diccionario = collections.Counter(listaDominio)
     print("Reporte cantidad de correos encontrados por dominio:", "\n")
     for key, value in diccionario.items():
         print(key, ":", value)
 
+# Si se pasa la opcion t, se cuenta cuantos dominios diferentes fueron encontrados.
 if args.cantidad == "t":
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
 
+# Si se pasa la opcion c, se realizan ambas cuentas.
 if args.cantidad == "c":
     diccionario = collections.Counter(listaDominio)
     print("Reporte cantidad de correos encontrados por dominio:", "\n")
@@ -151,5 +155,3 @@ if args.cantidad == "c":
         print(key,":", value)
     print("\n")
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
-
-
