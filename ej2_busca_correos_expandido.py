@@ -91,32 +91,25 @@ if args.exp_reg != None:
 
 # Se procesa el parámetro -o y sus opciones: a, d y l. La opción "a" ordena la lista por orden alfabético creciente,
 # la opción "d" la ordena por dominios de manera alfabética creciente, y la opción "l" ordena según el largo de carácteres de manera creciente.
+# Se procesa el parámetro -o y sus opciones: a, d y l.
 if args.orden == "a":
-    listaCorreos.sort()
-
-if args.orden == "d":
-    for correo in listaCorreos:
-        listaCorreos.sort(key = lambda correo: correo.split("@")[1])
-
-if args.orden == "l":
-    for correo in listaCorreos:
-        listaCorreos.sort(key = lambda correo: len(correo))
+  listaCorreos.sort()
 
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
 for correo in listaCorreos:
-  print(correo)
-print(*msjCantidad)
+    print(correo)
+print(msjCantidad)
 
-# Se procesa el parámetro -e y sus opciones: d, t y c. Primero se consiguen los dominios, haciendo split a los correos de la lista y guardando los
-# dominios en una lista nueva llamada "listaDominio". Si se pasa la opción "d", se cuenta la cantidad de correos que hay de cada dominio,
-# si se opta por la opción "t" se cuenta cuantos dominios diferentes fueron encontrados, y si la opción elegida es "c", se hacen y se imprimen ambas
-# cuentas. Para faciilitar el conteo, se usa la función Counter del módulo "collections".
+# Se procesa el parámetro -e y sus opciones: d, t y c.
 listaDominio = []
 for lineaCorreo in listaCorreos:
     listaDominio.append(lineaCorreo.split("@")[1])
 
 if args.cantidad == "d":
-    diccionario = collections.Counter(listaDominio)
+    lista=[]
+    for sinEspacios in listaDominio:
+        lista.append(sinEspacios.strip())
+    diccionario = collections.Counter(lista)
     print("Reporte cantidad de correos encontrados por dominio:", "\n")
     for key, value in diccionario.items():
         print(key, ":", value)
@@ -131,3 +124,32 @@ if args.cantidad == "c":
         print(key,":", value)
     print("\n")
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
+
+if args.orden == "a":
+    print(" ")
+    print("parametro -o a")
+    listaCorreos.sort()
+    print("Correos ordenados en forma alfabetica creciente: ","\n")
+    for correo in listaCorreos:
+        print(correo)
+
+if args.orden == "d":
+    print(" ")
+    print("parametro -o d")
+    print("Correos ordenados por dominio, en orden alfabético creciente por el dominio: ","\n")
+    for correo in listaCorreos:
+        listaCorreos.sort(key=lambda correo: str(correo.split("@")[1]))
+    for c in listaCorreos:
+        print(c)
+
+if args.orden == "l":
+    print(" ")
+    print("parametro -o l")
+    print("Correos ordenados por su largo en caracteres en forma creciente: ","\n")
+    lista=[]
+    for correo in listaCorreos:
+        lista.append(correo+":"+str(len(correo)))
+    for correoConCantCaract in lista:
+        lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
+    for l in lista:
+        print(l)
