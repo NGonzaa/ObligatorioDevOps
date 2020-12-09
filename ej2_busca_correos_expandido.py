@@ -100,6 +100,7 @@ if args.orden != None:
         print("Correos ordenados en forma alfabetica creciente: ","\n")
         for correo in listaCorreos:
             print(correo)
+        print(*msjCantidad)
     
     if args.orden == "d":
         print(" ")
@@ -109,6 +110,7 @@ if args.orden != None:
             listaCorreos.sort(key=lambda correo: str(correo.split("@")[1]))
         for correo in listaCorreos:
             print(correo)
+        print(*msjCantidad)
 
     if args.orden == "l":
         print(" ")
@@ -121,6 +123,7 @@ if args.orden != None:
             lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
         for l in lista:
             print(l)
+        print(*msjCantidad)
 else:
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
     for correo in listaCorreos:
