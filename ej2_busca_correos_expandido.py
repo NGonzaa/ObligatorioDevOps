@@ -120,7 +120,7 @@ if args.orden == "l":
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
 for correo in listaCorreos:
     print(correo)
-print(msjCantidad)
+print(*msjCantidad)
 
 # Se procesa el parámetro -e y sus opciones: d, t y c.
 listaDominio = []
