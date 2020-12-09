@@ -93,12 +93,13 @@ if args.exp_reg != None:
 # la opción "d" la ordena por dominios de manera alfabética creciente, y la opción "l" ordena según el largo de carácteres de manera creciente.
 # Se procesa el parámetro -o y sus opciones: a, d y l.
 if args.orden != None:
-    print("a")
     if args.orden == "a":
-        print("asd")
+        print(" ")
         print("parametro -o a")
         listaCorreos.sort()
         print("Correos ordenados en forma alfabetica creciente: ","\n")
+        for correo in listaCorreos:
+            print(correo)
     
     if args.orden == "d":
         print(" ")
@@ -106,6 +107,8 @@ if args.orden != None:
         print("Correos ordenados por dominio, en orden alfabético creciente por el dominio: ","\n")
         for correo in listaCorreos:
             listaCorreos.sort(key=lambda correo: str(correo.split("@")[1]))
+        for correo in listaCorreos:
+            print(correo)
 
     if args.orden == "l":
         print(" ")
