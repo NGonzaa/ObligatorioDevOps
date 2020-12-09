@@ -92,35 +92,36 @@ if args.exp_reg != None:
 # Se procesa el parámetro -o y sus opciones: a, d y l. La opción "a" ordena la lista por orden alfabético creciente,
 # la opción "d" la ordena por dominios de manera alfabética creciente, y la opción "l" ordena según el largo de carácteres de manera creciente.
 # Se procesa el parámetro -o y sus opciones: a, d y l.
-if args.orden == "a":
-    print(" ")
-    print("parametro -o a")
-    listaCorreos.sort()
-    print("Correos ordenados en forma alfabetica creciente: ","\n")
+if args.orden:
+    if args.orden == "a":
+        print(" ")
+        print("parametro -o a")
+        listaCorreos.sort()
+        print("Correos ordenados en forma alfabetica creciente: ","\n")
 
-if args.orden == "d":
-    print(" ")
-    print("parametro -o d")
-    print("Correos ordenados por dominio, en orden alfabético creciente por el dominio: ","\n")
-    for correo in listaCorreos:
-        listaCorreos.sort(key=lambda correo: str(correo.split("@")[1]))
+    if args.orden == "d":
+        print(" ")
+        print("parametro -o d")
+        print("Correos ordenados por dominio, en orden alfabético creciente por el dominio: ","\n")
+        for correo in listaCorreos:
+            listaCorreos.sort(key=lambda correo: str(correo.split("@")[1]))
 
-if args.orden == "l":
-    print(" ")
-    print("parametro -o l")
-    print("Correos ordenados por su largo en caracteres en forma creciente: ","\n")
-    lista=[]
-    for correo in listaCorreos:
-        lista.append(correo+":"+str(len(correo)))
-    for correoConCantCaract in lista:
-        lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
-    for l in lista:
-        print(l)
-
+    if args.orden == "l":
+        print(" ")
+        print("parametro -o l")
+        print("Correos ordenados por su largo en caracteres en forma creciente: ","\n")
+        lista=[]
+        for correo in listaCorreos:
+            lista.append(correo+":"+str(len(correo)))
+        for correoConCantCaract in lista:
+            lista.sort(key=lambda correoConCantCaract: correoConCantCaract.split(":")[1])
+        for l in lista:
+            print(l)
+else:
 # Habiendo terminado de alterar la lista de correos, según si hay expresión regular u orden, se imprime la lista junto al mensaje de cantidad.
-for correo in listaCorreos:
-    print(correo)
-print(*msjCantidad)
+    for correo in listaCorreos:
+        print(correo)
+    print(*msjCantidad)
 
 # Se procesa el parámetro -e y sus opciones: d, t y c.
 listaDominio = []
