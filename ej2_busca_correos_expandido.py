@@ -140,9 +140,14 @@ if args.cantidad == "d":
     for sinEspacios in listaDominio:
         lista.append(sinEspacios.strip())
     diccionario = collections.Counter(lista)
-    print("Reporte cantidad de correos encontrados por dominio:", "\n")
+    l = []
     for key, value in diccionario.items():
-        print(key, ":", value)
+        l.append(key, ":", str(value))
+    for dominio in l:
+        l.sort(key=lambda dominio: dominio.split(":")[1])
+    print("Reporte cantidad de correos encontrados por dominio:", "\n")
+    for cant in l:
+        print(cant)
 
 if args.cantidad == "t":
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
