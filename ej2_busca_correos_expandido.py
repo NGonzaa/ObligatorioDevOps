@@ -92,7 +92,7 @@ if args.exp_reg != None:
 # Se procesa el parámetro -o y sus opciones: a, d y l. La opción "a" ordena la lista por orden alfabético creciente,
 # la opción "d" la ordena por dominios de manera alfabética creciente, y la opción "l" ordena según el largo de carácteres de manera creciente.
 # Se procesa el parámetro -o y sus opciones: a, d y l.
-if args.orden:
+if args.orden != None:
     if args.orden == "a":
         print(" ")
         print("parametro -o a")
