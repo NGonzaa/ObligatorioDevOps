@@ -136,18 +136,10 @@ for lineaCorreo in listaCorreos:
     listaDominio.append(lineaCorreo.split("@")[1])
 
 if args.cantidad == "d":
-    lista=[]
-    for sinEspacios in listaDominio:
-        lista.append(sinEspacios.strip())
-    diccionario = collections.Counter(lista)
-    l = []
-    for key, value in diccionario.items():
-        l.append(key, ":", str(value))
-    for dominio in l:
-        l.sort(key=lambda dominio: dominio.split(":")[1])
+    diccionario = collections.Counter(listaDominio)
     print("Reporte cantidad de correos encontrados por dominio:", "\n")
-    for cant in l:
-        print(cant)
+    for key, value in diccionario.items():
+        print(key, ":", value)
 
 if args.cantidad == "t":
     print("Cantidad de dominios diferentes encontrados:", len(collections.Counter(listaDominio).keys()))
