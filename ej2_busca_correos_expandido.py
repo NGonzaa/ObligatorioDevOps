@@ -36,7 +36,6 @@ except SystemExit as e:
 
 # Se crea la lista con el directorio que se le va a pasar al script del ejercicio 1. Los parámetros que hayan sido ingresados también se van sumando a la lista.
 ej1ListaParametros = ['/home/nacho/DevOps/ej1_busca_correos.sh']
-print(ej1ListaParametros)
 
 if args.recursivo:
     ej1ListaParametros.append("-r")
